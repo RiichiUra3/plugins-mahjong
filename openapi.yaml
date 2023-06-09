@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   title: TODO Plugin
   description: A plugin that allows the user to create and manage a TODO list using ChatGPT. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
@@ -6,88 +6,57 @@ info:
 servers:
   - url: http://localhost:5003
 paths:
-  /todos/{username}:
+  /mahjong_paili/{hand}:
     get:
-      operationId: getTodos
-      summary: Get the list of todos
+      operationId: getPaili
+      summary: Get the shanten analysis of a hand 
       parameters:
       - in: path
-        name: username
+        name: hand
         schema:
-            type: string
+          type: string
         required: true
-        description: The name of the user.
+        description: The hand to analysis
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getTodosResponse'
-    post:
-      operationId: addTodo
-      summary: Add a todo to the list
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/addTodoRequest'
-      responses:
-        "200":
-          description: OK
-    delete:
-      operationId: deleteTodo
-      summary: Delete a todo from the list
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteTodoRequest'
-      responses:
-        "200":
-          description: OK
+                $ref: '#/components/schemas/getPailiResponse'
 
 components:
   schemas:
-    getTodosResponse:
+    getPailiResponse:
       type: object
       properties:
-        todos:
+        paili:
           type: array
           items:
-            type: string
-          description: The list of todos.
-    addTodoRequest:
-      type: object
-      required:
-      - todo
-      properties:
-        todo:
-          type: string
-          description: The todo to add to the list.
-          required: true
-    deleteTodoRequest:
-      type: object
-      required:
-      - todo_idx
-      properties:
-        todo_idx:
-          type: integer
-          description: The index of the todo to delete.
-          required: true
+            type: object
+            description: The analysis of a hand in paili format.
+            properties:
+              discard: 
+                type: string
+                description: which tile to discard
+              shanten:
+                type: int
+                description: the shanten number after discarding the tile
+              advance:
+                type: array
+                description: which tiles can help make an advance of the hand after drawing
+                items:
+                  type: string
+                  description: tiles to draw
+              advance_num:
+                type: int
+                description: number of tiles that can help make an advance of the hand
+              good_shape_advance:
+                type: array
+                description: which tiles can help make a good-shape advance of the hand
+                items:
+                  type: string
+                  description: tiles to draw
+              good_shape_advance_num:
+                type: int
+                description: number of tiles that can help make a good-shape advance

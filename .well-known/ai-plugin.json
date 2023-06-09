@@ -1,9 +1,9 @@
 {
     "schema_version": "v1",
-    "name_for_human": "TODO List (no auth)",
-    "name_for_model": "todo",
-    "description_for_human": "Manage your TODO list. You can add, remove and view your TODOs.",
-    "description_for_model": "Plugin for managing a TODO list, you can add, remove and view your TODOs.",
+    "name_for_human": "Riichi Majhong Assistant",
+    "name_for_model": "riichi_majhon_assistant",
+    "description_for_human": "An assistant to help you analyze points, paili, and detailed analysis of which tile to discard in a riich majhong game",
+    "description_for_model": "Plugin for analyze hand in a riichi majhong game, including paili, shanten number, which tile to discard, and the points of a hand.",
     "auth": {
       "type": "none"
     },
