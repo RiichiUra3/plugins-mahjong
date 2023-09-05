@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TODO Plugin
-  description: A plugin that allows the user to create and manage a TODO list using ChatGPT. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
+  description: A plugin that allows the user to analysis his hand in paili format
   version: 'v1'
 servers:
   - url: http://localhost:5003
@@ -60,3 +60,6 @@ components:
               good_shape_advance_num:
                 type: int
                 description: number of tiles that can help make a good-shape advance
+              AI_recommendation:
+                type: float
+                description: AI recommendation for the next move, value from 0 to 1 and is normalized across the hand, larger means better
