@@ -66,6 +66,7 @@ def construct_input(tiles):
     
 def get_ai_pred(hand):
     tiles = [str(t) for t in parse_tiles(hand)]
+    print(tiles)
     self_info, record_info, global_info, valid_actions_mask = construct_input(tiles)
     self_info = self_info.unsqueeze(0).to(0)
     record_info = record_info.unsqueeze(0).to(0)
@@ -87,6 +88,7 @@ def get_paili_json(hand):
     ai_pred = get_ai_pred(hand)
     result_array = []
     for tile in result.discard_to_advance:
+        print(tile)
         result_discard_tile = result.discard_to_advance[tile]
         result_array.append({
             "discard": str(tile),
@@ -97,5 +99,7 @@ def get_paili_json(hand):
             "good_shape_advance_num": result_discard_tile.good_shape_advance_num or 0
         })
         for section in ai_pred:
-            result_array[-1][section] = float(ai_pred[section][str(tile)])
+            if (pos := str(tile)) not in ai_pred[section]:
+                pos = "0" + pos[1:]
+            result_array[-1][section] = float(ai_pred[section][pos])
     return json.dumps(result_array)

@@ -16,7 +16,7 @@ paths:
         schema:
           type: string
         required: true
-        description: The hand to analysis
+        description: The hand to analysis. In a hand, s means sozu, m means manzu/wanzu, p means pinzu, z means kazepai and sangenpai
       responses:
         "200":
           description: OK
