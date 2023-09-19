@@ -63,3 +63,9 @@ components:
               AI_recommendation:
                 type: float
                 description: AI recommendation for the next move, value from 0 to 1 and is normalized across the hand, larger means better
+              Expected_score:
+                type: float
+                description: Expected score obtained of the hand
+              Expected_agari_rate:
+                type: float
+                description: Expected agari rate (possibility of forming a winning hand) of the hand
